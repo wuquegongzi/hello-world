@@ -1,6 +1,6 @@
 package com.leon;
 
-import com.leon.array.Array;
+import com.leon.strucyures.Array;
 
 public class Main {
 
