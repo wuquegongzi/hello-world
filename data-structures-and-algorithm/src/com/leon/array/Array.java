@@ -194,7 +194,7 @@ public class Array<E> {
         size -- ;
         //内存优化
         data[size] = null;
-        //缩减容量
+        //缩减容量  防止复杂度的震荡
         if(size == data.length / 4 && data.length / 2 != 0){
             resize(data.length / 2);
         }

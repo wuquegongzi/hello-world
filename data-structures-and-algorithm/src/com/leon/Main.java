@@ -1,5 +1,6 @@
 package com.leon;
 
+
 import com.leon.array.Array;
 
 public class Main {
@@ -8,6 +9,7 @@ public class Main {
 	// write your code here
         System.out.println("欢迎来到leon的数据结构世界~ \n " +
                 "Array 自我实现的数组 \n");
+
 
         Array<Integer> arr= new Array<Integer>();
         for (int i = 0; i < 10 ; i++){
