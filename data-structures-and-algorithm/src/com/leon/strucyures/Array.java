@@ -158,6 +158,22 @@ public class Array<E> {
     }
 
     /**
+     * 获取最后元素
+     * @return
+     */
+    public E getLast(){
+        return get(size - 1);
+    }
+
+    /**
+     * 获取最前元素
+     * @return
+     */
+    public E getFirst(){
+        return get(0);
+    }
+
+    /**
      * 修改 index 索引位置的元素值
      * @param index
      * @param e
