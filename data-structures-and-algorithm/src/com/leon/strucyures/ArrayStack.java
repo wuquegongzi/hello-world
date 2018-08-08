@@ -73,4 +73,18 @@ public class ArrayStack<E> implements Stack<E> {
         res.append("] top");
         return res.toString();
     }
+
+    public static void main(String[] args) {
+        System.out.println("Stack 自我实现的栈 \n");
+
+        ArrayStack<Integer> stack= new ArrayStack<Integer>();
+        for (int i = 0; i < 10 ; i++){
+            stack.push(i);
+            System.out.println(stack);
+        }
+
+        stack.pop();
+        System.out.println(stack);
+        System.out.println(stack.peek());
+    }
 }
