@@ -1,8 +1,9 @@
 package com.leon.strucyures;
 
 /**
+ * 数组队列
  * @package: com.leon.strucyures
- * @author: 陈明磊<minglei.chen @ gm-medicare.com>
+ * @author: 陈明磊<swchenminglei@163.com>
  * @date: 2018/8/8 16:37
  * @ModificarionHistory who     when   what
  * --------------|------------------|--------------
