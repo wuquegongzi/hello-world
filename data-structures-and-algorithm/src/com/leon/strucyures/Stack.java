@@ -1,6 +1,7 @@
 package com.leon.strucyures;
 
 /**
+ * 栈接口
  * @package: com.leon.strucyures
  * @author: 陈明磊<swchenminglei@163.com>
  * @date: 2018/8/7 20:12

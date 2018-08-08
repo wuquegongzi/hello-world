@@ -1,6 +1,7 @@
 package com.leon.strucyures;
 
 /**
+ * 动态数组
  * @package: com.leon.array
  * @author: 陈明磊<swchenminglei@163.com>
  * @date: 2018/8/7 13:11
