@@ -7,6 +7,11 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
+/**
+ * 生产者
+ * @author chenminglei
+ *
+ */
 public class Procuder {
 	
 	public static void main(String[] args) throws IOException, TimeoutException {
@@ -24,7 +29,7 @@ public class Procuder {
 		Channel channel = connection.createChannel();
 		
 		//4.通过Channel发送数据
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 200; i++) {
 			String msg = i+".Hello RabbitMQ!!!";
 			channel.basicPublish("", "test001", null, msg.getBytes());
 		}

@@ -6,6 +6,11 @@ import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.QueueingConsumer;
 import com.rabbitmq.client.QueueingConsumer.Delivery;
 
+/**
+ * 消费者
+ * @author chenminglei
+ *
+ */
 public class Consumer {
 	
 	public static void main(String[] args) throws Exception {
