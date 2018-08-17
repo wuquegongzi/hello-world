@@ -85,7 +85,7 @@ public class LinkedList<E> {
 
         if(index < 0 || index > size){
             try {
-                throw new IllegalAccessException(" Add failed. Illegal index.");
+                throw new IllegalAccessException("Add failed. Illegal index.");
             } catch (IllegalAccessException e1) {
                 e1.printStackTrace();
             }
@@ -121,7 +121,7 @@ public class LinkedList<E> {
 
         if(index < 0 || index > size){
             try {
-                throw new IllegalAccessException(" Get failed. Illegal index.");
+                throw new IllegalAccessException("Get failed. Illegal index.");
             } catch (IllegalAccessException e1) {
                 e1.printStackTrace();
             }
@@ -161,7 +161,7 @@ public class LinkedList<E> {
     public void set(int index,E e){
         if(index < 0 || index > size){
             try {
-                throw new IllegalAccessException(" Set failed. Illegal index.");
+                throw new IllegalAccessException("Set failed. Illegal index.");
             } catch (IllegalAccessException e1) {
                 e1.printStackTrace();
             }
@@ -191,4 +191,81 @@ public class LinkedList<E> {
         }
         return false;
     }
+
+    /**
+     * 去除链表中某个元素
+     * @param index
+     * @return
+     */
+    public E remove(int index){
+        if(index < 0 || index > size){
+            try {
+                throw new IllegalAccessException("Remove failed. Illegal index.");
+            } catch (IllegalAccessException e1) {
+                e1.printStackTrace();
+            }
+        }
+
+        Node prev = dummyHead;
+        for (int i = 0; i < index; i++) {
+            prev = prev.next;
+        }
+
+        Node retNode = prev.next;
+        prev.next = retNode.next;
+        retNode.next = null;
+        size --;
+
+        return retNode.e;
+    }
+
+    /**
+     * 清除首元素
+     * @return
+     */
+    public E removeFirst(){
+       return this.remove(0);
+    }
+
+    /**
+     * 清除首元素
+     * @return
+     */
+    public E removeLast(){
+        return this.remove(size-1);
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder res = new StringBuilder();
+
+        Node cur = dummyHead.next;
+        while(cur != null){
+            res.append(cur + "->");
+            cur = cur.next;
+        }
+
+        return res.toString();
+    }
+
+    public static void main(String[] args) {
+        LinkedList<Integer> list = new LinkedList<>();
+        for (int i = 0; i < 10 ; i++) {
+            list.add(i,i);
+            System.out.println(list.toString());
+        }
+        list.addFirst(99);
+        System.out.println(list.toString());
+
+        list.remove(4);
+        System.out.println(list.toString());
+
+        list.removeFirst();
+        System.out.println(list.toString());
+
+        list.removeLast();
+        System.out.println(list.toString());
+    }
+
+
 }
