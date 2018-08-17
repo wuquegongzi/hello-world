@@ -75,7 +75,7 @@ public class ArrayStack<E> implements Stack<E> {
     }
 
     public static void main(String[] args) {
-        System.out.println("Stack 自我实现的栈 \n");
+        System.out.println("Stack 数组自我实现的栈 \n");
 
         ArrayStack<Integer> stack= new ArrayStack<Integer>();
         for (int i = 0; i < 10 ; i++){
