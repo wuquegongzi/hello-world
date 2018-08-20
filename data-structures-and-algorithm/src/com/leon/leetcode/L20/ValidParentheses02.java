@@ -1,6 +1,7 @@
-package com.leon.leetcode;
+package com.leon.leetcode.L20;
 
-import java.util.Stack;
+
+import com.leon.strucyures.ArrayStack;
 
 /**
  * Solution20 https://leetcode-cn.com/problems/valid-parentheses/description/
@@ -19,11 +20,11 @@ import java.util.Stack;
  * @ModificarionHistory who     when   what
  * --------------|------------------|--------------
  */
-public class ValidParentheses {
+public class ValidParentheses02 {
 
    public boolean isValid(String s){
 
-       Stack<Character> stack = new Stack<Character>();
+       ArrayStack<Character> stack = new ArrayStack<Character>();
        for(int i = 0 ; i < s.length() ; i++){
            char c = s.charAt(i);
            if(c == '{' || c == '[' || c == '('){
@@ -33,7 +34,7 @@ public class ValidParentheses {
                    return false;
                }
 
-               char topChar = stack.pop();
+               char topChar = (char)stack.pop();
                if(c == ')' && topChar != '('){
                    return false;
                }
@@ -51,9 +52,9 @@ public class ValidParentheses {
 
     public static void main(String[] args) {
 
-        String s = "[{()}]";
+        String s = "[{(]}]";
 
-        ValidParentheses validParentheses = new ValidParentheses();
+        ValidParentheses02 validParentheses = new ValidParentheses02();
 
         System.out.println(validParentheses.isValid(s));
     }

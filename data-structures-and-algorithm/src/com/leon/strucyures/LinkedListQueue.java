@@ -1,5 +1,9 @@
 package com.leon.strucyures;
 
+/**
+ * 链表实现的队列
+ * @param <E>
+ */
 public class LinkedListQueue<E> implements Queue<E> {
 
 
