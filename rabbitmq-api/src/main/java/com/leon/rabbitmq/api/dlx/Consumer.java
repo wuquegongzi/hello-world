@@ -7,6 +7,11 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
+/**
+ * 死信队列  消费者
+ * @author chenminglei
+ *
+ */
 public class Consumer {
 
 	public static void main(String[] args) throws Exception {

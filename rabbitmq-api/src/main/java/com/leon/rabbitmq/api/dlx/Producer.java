@@ -33,7 +33,7 @@ public class Producer {
 			BasicProperties properties = new BasicProperties.Builder()
 					.deliveryMode(2)
 					.contentEncoding("UTF-8")
-					.expiration("10000")
+					.expiration("10000")  //过期时间
 					.build();
 			channel.basicPublish(exchange, routingKey, true, properties, msg.getBytes());
 		}
