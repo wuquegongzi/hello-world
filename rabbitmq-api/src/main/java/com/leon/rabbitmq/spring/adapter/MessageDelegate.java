@@ -2,6 +2,9 @@ package com.leon.rabbitmq.spring.adapter;
 
 import java.util.Map;
 
+import com.leon.rabbitmq.spring.entity.Order;
+import com.leon.rabbitmq.spring.entity.Packaged;
+
 /**
  * 消息适配器 自定义
  * @author chenminglei
@@ -35,6 +38,18 @@ public class MessageDelegate {
 	
 	public void consumeMessage(Map messageBody) {
 		System.err.println("map方法, 消息内容:" + messageBody);
+	}
+	
+	public void consumeMessage(Order order) {
+		System.err.println("order对象, 消息内容, id: " + order.getId() + 
+				", name: " + order.getName() + 
+				", content: "+ order.getContent());
+	}
+	
+	public void consumeMessage(Packaged pack) {
+		System.err.println("package对象, 消息内容, id: " + pack.getId() + 
+				", name: " + pack.getName() + 
+				", content: "+ pack.getDescription());
 	}
 	
 

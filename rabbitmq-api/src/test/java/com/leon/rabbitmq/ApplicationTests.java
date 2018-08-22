@@ -153,6 +153,33 @@ public class ApplicationTests {
 		rabbitTemplate.send("topic001", "spring.order", message);
 	}
 	
+	/**
+	 * 测试 java 对象 消息发送
+	 * @throws Exception
+	 */
+	@Test
+	public void testSendJavaMessage() throws Exception {
+		
+		Order order = new Order();
+		order.setId("001");
+		order.setName("订单消息");
+		order.setContent("订单描述信息");
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(order);
+		System.err.println("order 4 json: " + json);
+		
+		MessageProperties messageProperties = new MessageProperties();
+		//这里注意一定要修改contentType为 application/json
+		messageProperties.setContentType("application/json");
+		//需要指定实体类路径
+		messageProperties.getHeaders().put("__TypeId__", "com.leon.rabbitmq.spring.entity.Order");
+		Message message = new Message(json.getBytes(), messageProperties);
+		
+		rabbitTemplate.send("topic001", "spring.order", message);
+	}
+	
+
+	
 	
 
 }
