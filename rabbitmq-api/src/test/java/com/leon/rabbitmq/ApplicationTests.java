@@ -32,6 +32,7 @@ public class ApplicationTests {
 		
 	}
 	
+	
 	@Autowired
 	private RabbitAdmin rabbitAdmin;
 	
@@ -70,6 +71,8 @@ public class ApplicationTests {
 		//清空队列数据
 		rabbitAdmin.purgeQueue("test.topic.queue", false);
 	}
+	
+	
 	
 	@Autowired
 	private RabbitTemplate rabbitTemplate;

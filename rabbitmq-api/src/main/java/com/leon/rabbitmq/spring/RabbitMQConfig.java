@@ -1,16 +1,25 @@
 package com.leon.rabbitmq.spring;
 
+import java.util.UUID;
+
+import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.ChannelAwareMessageListener;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
+import org.springframework.amqp.support.ConsumerTagStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+
+import com.rabbitmq.client.Channel;
 
 /**
  * 
@@ -120,6 +129,49 @@ public class RabbitMQConfig {
     	
     	RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
     	return rabbitTemplate;
+    }
+    
+    /**
+     * SimpleMessageListenerContainer
+           简单消息监听容器
+     * @param connectionFactory
+     * @return
+     */
+    @Bean
+    public SimpleMessageListenerContainer messageContainer(ConnectionFactory connectionFactory) {
+		
+    	SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(connectionFactory);
+    	container.setQueues(queue001(),queue002(),queue003());
+    	container.setConcurrentConsumers(1);
+    	container.setMaxConcurrentConsumers(5);
+    	container.setDefaultRequeueRejected(false); //不进入重复队列
+    	container.setAcknowledgeMode(AcknowledgeMode.AUTO);//自动签收
+    	container.setExposeListenerChannel(true); //是否显性显示
+    	//设置标签
+    	container.setConsumerTagStrategy(new ConsumerTagStrategy() {
+
+			@Override
+			public String createConsumerTag(String queue) {
+
+				return queue + "_" +UUID.randomUUID();
+			}
+    		
+    	});
+    	
+    	//设置监听
+    	//ChannelAwareMessageListener 监听接口
+    	container.setMessageListener(new ChannelAwareMessageListener() {
+			
+			@Override
+			public void onMessage(Message message, Channel channel) throws Exception {
+
+              String msg = new String(message.getBody());
+              System.out.println("消费者消费的消息："+msg);
+				
+			}
+		});
+    	
+    	return container;
     }
 	
 	
