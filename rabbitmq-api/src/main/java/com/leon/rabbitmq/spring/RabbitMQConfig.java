@@ -26,6 +26,8 @@ import org.springframework.context.annotation.Configuration;
 
 import com.leon.rabbitmq.spring.adapter.MessageDelegate;
 import com.leon.rabbitmq.spring.converter.TextMessageConverter;
+import com.leon.rabbitmq.spring.entity.Order;
+import com.leon.rabbitmq.spring.entity.Packaged;
 import com.rabbitmq.client.Channel;
 
 /**
@@ -217,6 +219,7 @@ public class RabbitMQConfig {
     	
     	
     	// 1.2 DefaultJackson2JavaTypeMapper & Jackson2JsonMessageConverter 支持java对象转换
+        /*
         MessageListenerAdapter adapter = new MessageListenerAdapter(new MessageDelegate());
         adapter.setDefaultListenerMethod("consumeMessage");
         
@@ -227,6 +230,26 @@ public class RabbitMQConfig {
         
         adapter.setMessageConverter(jackson2JsonMessageConverter);
         container.setMessageListener(adapter);
+        */
+    	
+    	
+    	//1.3 DefaultJackson2JavaTypeMapper & Jackson2JsonMessageConverter 支持java对象多映射转换
+        MessageListenerAdapter adapter = new MessageListenerAdapter(new MessageDelegate());
+        adapter.setDefaultListenerMethod("consumeMessage");
+        Jackson2JsonMessageConverter jackson2JsonMessageConverter = new Jackson2JsonMessageConverter();
+        DefaultJackson2JavaTypeMapper javaTypeMapper = new DefaultJackson2JavaTypeMapper();
+        
+        Map<String, Class<?>> idClassMapping = new HashMap<String, Class<?>>();
+		idClassMapping.put("order", Order.class);
+		idClassMapping.put("packaged", Packaged.class);
+		
+		//设置标签映射关系
+		javaTypeMapper.setIdClassMapping(idClassMapping);
+		
+		jackson2JsonMessageConverter.setJavaTypeMapper(javaTypeMapper);
+        adapter.setMessageConverter(jackson2JsonMessageConverter);
+        container.setMessageListener(adapter);
+        
     	
     	return container;
     }
