@@ -1,5 +1,7 @@
 package com.leon.rabbitmq.spring;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.amqp.core.AcknowledgeMode;
@@ -14,11 +16,14 @@ import org.springframework.amqp.rabbit.core.ChannelAwareMessageListener;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
+import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.amqp.support.ConsumerTagStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import com.leon.rabbitmq.spring.adapter.MessageDelegate;
+import com.leon.rabbitmq.spring.converter.TextMessageConverter;
 import com.rabbitmq.client.Channel;
 
 /**
@@ -158,7 +163,8 @@ public class RabbitMQConfig {
     		
     	});
     	
-    	//设置监听
+    	/*
+    	 //设置监听
     	//ChannelAwareMessageListener 监听接口
     	container.setMessageListener(new ChannelAwareMessageListener() {
 			
@@ -169,7 +175,17 @@ public class RabbitMQConfig {
               System.out.println("消费者消费的消息："+msg);
 				
 			}
-		});
+		});*/
+    	
+    	//适配器方式1
+    	//可自定义更换默认方法，默认handleMessage
+    	//如果传送 字符串 形式的信息，
+    	//需要做自定义转换器,将字节转换为字符串,否则会抛异常, 但是可以发送成功    
+    	MessageListenerAdapter adapter = new MessageListenerAdapter(new MessageDelegate());
+    	adapter.setDefaultListenerMethod("consumeMessage"); 
+    	adapter.setMessageConverter(new TextMessageConverter());
+    	container.setMessageListener(adapter);
+    	
     	
     	return container;
     }
