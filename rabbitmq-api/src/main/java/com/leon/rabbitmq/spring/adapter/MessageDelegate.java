@@ -1,5 +1,7 @@
 package com.leon.rabbitmq.spring.adapter;
 
+import java.util.Map;
+
 /**
  * 消息适配器 自定义
  * @author chenminglei
@@ -29,6 +31,10 @@ public class MessageDelegate {
 	
 	public void method2(String messageBody) {
 		System.err.println("method2 收到消息内容:" + new String(messageBody));
+	}
+	
+	public void consumeMessage(Map messageBody) {
+		System.err.println("map方法, 消息内容:" + messageBody);
 	}
 	
 

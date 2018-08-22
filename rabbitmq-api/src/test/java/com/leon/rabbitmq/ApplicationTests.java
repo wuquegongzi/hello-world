@@ -22,6 +22,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.leon.rabbitmq.spring.entity.Order;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -126,6 +129,30 @@ public class ApplicationTests {
 		rabbitTemplate.send("topic001", "spring.abc", message);
 		rabbitTemplate.send("topic002", "rabbit.abc", message);
 	}
+	
+	/**
+	 * 测试json格式的消息发送
+	 * @throws Exception
+	 */
+	@Test
+	public void testSendJsonMessage() throws Exception {
+		
+		Order order = new Order();
+		order.setId("001");
+		order.setName("消息订单");
+		order.setContent("描述信息");
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(order);
+		System.out.println("order 4 json: " + json);
+		
+		MessageProperties messageProperties = new MessageProperties();
+		//这里注意一定要修改contentType为 application/json
+		messageProperties.setContentType("application/json");
+		Message message = new Message(json.getBytes(), messageProperties);
+		
+		rabbitTemplate.send("topic001", "spring.order", message);
+	}
+	
 	
 
 }

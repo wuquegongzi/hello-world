@@ -18,6 +18,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.amqp.support.ConsumerTagStrategy;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -164,7 +165,7 @@ public class RabbitMQConfig {
     	});
     	
     	/*
-    	 //设置监听
+    	 //设置监听 spring 提供的监听接口方式
     	//ChannelAwareMessageListener 监听接口
     	container.setMessageListener(new ChannelAwareMessageListener() {
 			
@@ -188,13 +189,22 @@ public class RabbitMQConfig {
     	
     	//适配器方式2
     	//我们的队列名称 和 方法名称 也可以进行一一的匹配
-    	MessageListenerAdapter adapter = new MessageListenerAdapter(new MessageDelegate());
+    	/*MessageListenerAdapter adapter = new MessageListenerAdapter(new MessageDelegate());
     	adapter.setMessageConverter(new TextMessageConverter());
     	Map<String, String> queueOrTagToMethodName = new HashMap<>();
     	queueOrTagToMethodName.put("queue001", "method1");
     	queueOrTagToMethodName.put("queue002", "method2");
     	adapter.setQueueOrTagToMethodName(queueOrTagToMethodName);
-    	container.setMessageListener(adapter);    	
+    	container.setMessageListener(adapter);    */
+    	
+    	// 1.1 支持json格式的转换器
+        MessageListenerAdapter adapter = new MessageListenerAdapter(new MessageDelegate());
+        adapter.setDefaultListenerMethod("consumeMessage");  //对应的参数为Map
+        
+        Jackson2JsonMessageConverter jackson2JsonMessageConverter = new Jackson2JsonMessageConverter();
+        adapter.setMessageConverter(jackson2JsonMessageConverter);
+        
+        container.setMessageListener(adapter);
     	
     	return container;
     }
