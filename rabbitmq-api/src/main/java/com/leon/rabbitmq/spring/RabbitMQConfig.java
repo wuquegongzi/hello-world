@@ -18,6 +18,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.amqp.support.ConsumerTagStrategy;
+import org.springframework.amqp.support.converter.ContentTypeDelegatingMessageConverter;
 import org.springframework.amqp.support.converter.DefaultJackson2JavaTypeMapper;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +26,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import com.leon.rabbitmq.spring.adapter.MessageDelegate;
+import com.leon.rabbitmq.spring.converter.ImageMessageConverter;
+import com.leon.rabbitmq.spring.converter.PDFMessageConverter;
 import com.leon.rabbitmq.spring.converter.TextMessageConverter;
 import com.leon.rabbitmq.spring.entity.Order;
 import com.leon.rabbitmq.spring.entity.Packaged;
@@ -234,6 +237,7 @@ public class RabbitMQConfig {
     	
     	
     	//1.3 DefaultJackson2JavaTypeMapper & Jackson2JsonMessageConverter 支持java对象多映射转换
+      /*  
         MessageListenerAdapter adapter = new MessageListenerAdapter(new MessageDelegate());
         adapter.setDefaultListenerMethod("consumeMessage");
         Jackson2JsonMessageConverter jackson2JsonMessageConverter = new Jackson2JsonMessageConverter();
@@ -249,8 +253,37 @@ public class RabbitMQConfig {
 		jackson2JsonMessageConverter.setJavaTypeMapper(javaTypeMapper);
         adapter.setMessageConverter(jackson2JsonMessageConverter);
         container.setMessageListener(adapter);
+        */
         
     	
+        //1.4 ext convert
+        MessageListenerAdapter adapter = new MessageListenerAdapter(new MessageDelegate());
+        adapter.setDefaultListenerMethod("consumeMessage");
+        
+        //全局的转换器
+		ContentTypeDelegatingMessageConverter convert = new ContentTypeDelegatingMessageConverter();
+		
+		TextMessageConverter textConvert = new TextMessageConverter();
+		convert.addDelegate("text", textConvert);
+		convert.addDelegate("html/text", textConvert);
+		convert.addDelegate("xml/text", textConvert);
+		convert.addDelegate("text/plain", textConvert);
+		
+		Jackson2JsonMessageConverter jsonConvert = new Jackson2JsonMessageConverter();
+		convert.addDelegate("json", jsonConvert);
+		convert.addDelegate("application/json", jsonConvert);
+		
+		ImageMessageConverter imageConverter = new ImageMessageConverter();
+		convert.addDelegate("image/png", imageConverter);
+		convert.addDelegate("image", imageConverter);
+		
+		PDFMessageConverter pdfConverter = new PDFMessageConverter();
+		convert.addDelegate("application/pdf", pdfConverter);
+        
+		
+		adapter.setMessageConverter(convert);
+		container.setMessageListener(adapter);
+		
     	return container;
     }
 	

@@ -1,5 +1,6 @@
 package com.leon.rabbitmq.spring.adapter;
 
+import java.io.File;
 import java.util.Map;
 
 import com.leon.rabbitmq.spring.entity.Order;
@@ -50,6 +51,10 @@ public class MessageDelegate {
 		System.err.println("package对象, 消息内容, id: " + pack.getId() + 
 				", name: " + pack.getName() + 
 				", content: "+ pack.getDescription());
+	}
+	
+	public void consumeMessage(File file) {
+		System.err.println("文件对象 方法, 消息内容:" + file.getName());
 	}
 	
 

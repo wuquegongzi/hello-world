@@ -1,5 +1,7 @@
 package com.leon.rabbitmq;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -216,6 +218,25 @@ public class ApplicationTests {
 		rabbitTemplate.send("topic001", "spring.pack", message2);
 	}
 
+	/**
+	 * 全局转换器
+	 * @throws Exception
+	 */
+	@Test
+	public void testSendExtConverterMessage() throws Exception {
+		/*	byte[] body = Files.readAllBytes(Paths.get("d:/002_books", "picture.png"));
+			MessageProperties messageProperties = new MessageProperties();
+			messageProperties.setContentType("image/png");
+			messageProperties.getHeaders().put("extName", "png");
+			Message message = new Message(body, messageProperties);
+			rabbitTemplate.send("", "image_queue", message);*/
+		
+			byte[] body = Files.readAllBytes(Paths.get("d:/002_books", "test.pdf"));
+			MessageProperties messageProperties = new MessageProperties();
+			messageProperties.setContentType("application/pdf");
+			Message message = new Message(body, messageProperties);
+			rabbitTemplate.send("", "pdf_queue", message);
+	}
 	
 	
 
