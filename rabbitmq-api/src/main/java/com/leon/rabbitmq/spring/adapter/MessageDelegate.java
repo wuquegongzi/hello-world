@@ -22,5 +22,14 @@ public class MessageDelegate {
 	public void consumeMessage(String messageBody) {
 		System.err.println("字符串方法, 消息内容:" + messageBody);
 	}
+	
+	public void method1(String messageBody) {
+		System.err.println("method1 收到消息内容:" + new String(messageBody));
+	}
+	
+	public void method2(String messageBody) {
+		System.err.println("method2 收到消息内容:" + new String(messageBody));
+	}
+	
 
 }

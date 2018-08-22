@@ -124,6 +124,7 @@ public class ApplicationTests {
 		Message message = new Message("mq 消息1234".getBytes(), messageProperties);
 		
 		rabbitTemplate.send("topic001", "spring.abc", message);
+		rabbitTemplate.send("topic002", "rabbit.abc", message);
 	}
 	
 

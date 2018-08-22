@@ -177,15 +177,24 @@ public class RabbitMQConfig {
 			}
 		});*/
     	
-    	//适配器方式1
+    	/*//适配器方式1
     	//可自定义更换默认方法，默认handleMessage
     	//如果传送 字符串 形式的信息，
     	//需要做自定义转换器,将字节转换为字符串,否则会抛异常, 但是可以发送成功    
     	MessageListenerAdapter adapter = new MessageListenerAdapter(new MessageDelegate());
     	adapter.setDefaultListenerMethod("consumeMessage"); 
     	adapter.setMessageConverter(new TextMessageConverter());
-    	container.setMessageListener(adapter);
+    	container.setMessageListener(adapter);*/
     	
+    	//适配器方式2
+    	//我们的队列名称 和 方法名称 也可以进行一一的匹配
+    	MessageListenerAdapter adapter = new MessageListenerAdapter(new MessageDelegate());
+    	adapter.setMessageConverter(new TextMessageConverter());
+    	Map<String, String> queueOrTagToMethodName = new HashMap<>();
+    	queueOrTagToMethodName.put("queue001", "method1");
+    	queueOrTagToMethodName.put("queue002", "method2");
+    	adapter.setQueueOrTagToMethodName(queueOrTagToMethodName);
+    	container.setMessageListener(adapter);    	
     	
     	return container;
     }
