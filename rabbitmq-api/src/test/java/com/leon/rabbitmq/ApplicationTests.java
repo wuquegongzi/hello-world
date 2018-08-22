@@ -5,23 +5,17 @@ import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.Binding.DestinationType;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.FanoutExchange;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessagePostProcessor;
-import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -38,7 +32,6 @@ public class ApplicationTests {
 	@Test
 	public void testAdmin() throws Exception{
 		
-		//原始API 使用
 		rabbitAdmin.declareExchange(new DirectExchange("test.direct", false, false));
 		rabbitAdmin.declareExchange(new TopicExchange("test.topic", false, false));
 		rabbitAdmin.declareExchange(new FanoutExchange("test.fanout", false, false));
@@ -70,44 +63,5 @@ public class ApplicationTests {
 		//清空队列数据
 		rabbitAdmin.purgeQueue("test.topic.queue", false);
 	}
-	
-	@Autowired
-	private RabbitTemplate rabbitTemplate;
-	
-	@Test
-	public void testSendMessage() {
-		
-		//创建消息
-		MessageProperties messageProperties = new MessageProperties();
-		messageProperties.getHeaders().put("desc", "信息描述");
-		messageProperties.getHeaders().put("type", "自定义消息类型..");
-		Message message = new Message("Hello RabbitMQ ~".getBytes(), messageProperties);
-		
-		rabbitTemplate.convertAndSend("topic001", "spring.amqp", message, new MessagePostProcessor() {
-
-			@Override
-			public Message postProcessMessage(Message message) throws AmqpException {
-				System.out.println("----------添加额外的设置-----------");
-				message.getMessageProperties().getHeaders().put("desc", "信息描述");
-				message.getMessageProperties().getHeaders().put("type", "自定义消息类型..");
-				
-				return message;
-			}
-		});
-	}
-	
-	@Test
-	public void testSendMessage2() throws Exception {
-		//1 创建消息
-		MessageProperties messageProperties = new MessageProperties();
-		messageProperties.setContentType("text/plain");
-		Message message = new Message("mq 消息1234".getBytes(), messageProperties);
-		
-		rabbitTemplate.send("topic001", "spring.abc", message);
-		
-		rabbitTemplate.convertAndSend("topic001", "spring.amqp", "hello object message send!");
-		rabbitTemplate.convertAndSend("topic002", "rabbit.abc", "hello object message send!");
-	}
-	
 
 }
