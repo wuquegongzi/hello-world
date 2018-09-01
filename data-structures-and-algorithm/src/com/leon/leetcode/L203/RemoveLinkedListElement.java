@@ -18,6 +18,8 @@ package com.leon.leetcode.L203;
  */
 public class RemoveLinkedListElement {
 
+
+
     public ListNode removeElements(ListNode head, int val) {
 
         //首先删除 头节点为 val 的情况
@@ -47,7 +49,46 @@ public class RemoveLinkedListElement {
         return head;
     }
 
+    /**
+     * 使用虚拟头节点
+     * @param head
+     * @param val
+     * @return
+     */
+    public ListNode removeElements2(ListNode head, int val) {
+
+
+        ListNode dummyHead = new ListNode(-1);
+        dummyHead.next = head;
+
+        ListNode prev = dummyHead;
+        while(prev.next != null){
+          if(prev.next.val == val){
+             prev.next = prev.next.next;
+          }else{
+              prev = prev.next;
+          }
+        }
+
+        return dummyHead.next;
+    }
+
+
     public static void main(String[] args) {
+
+        int[] nums = {2,3,5,4,2,6,6};
+        ListNode head = new ListNode(nums);
+
+        System.out.println(head);
+
+        RemoveLinkedListElement removeLinkedListElement = new RemoveLinkedListElement();
+        ListNode res = removeLinkedListElement.removeElements(head,6);
+
+        System.out.println(res);
+
+        res = removeLinkedListElement.removeElements2(head,2);
+
+        System.out.println(res);
 
     }
 
