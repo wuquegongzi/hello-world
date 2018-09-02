@@ -73,10 +73,53 @@ public class RemoveLinkedListElement {
         return dummyHead.next;
     }
 
+    /**
+     *  递归
+     * @param head
+     * @param val
+     * @return
+     */
+    public ListNode removeElements3(ListNode head, int val) {
+
+
+        if(head == null){
+            return null;
+        }
+
+        ListNode res = removeElements3(head.next,val);
+
+        if(head.val == val){
+           return res;
+        }else{
+            head.next = res;
+            return head;
+        }
+
+    }
+
+    /**
+     * 递归精简
+     * @param head
+     * @param val
+     * @return
+     */
+    public ListNode removeElements4(ListNode head, int val) {
+
+
+        if(head == null){
+            return null;
+        }
+
+        head.next = removeElements4(head.next,val);
+
+        return head.val == val ? head.next : head ;
+
+    }
+
 
     public static void main(String[] args) {
 
-        int[] nums = {2,3,5,4,2,6,6};
+        int[] nums = {2,3,5,4,2,6,6,7,1,2,3,4,5,6,7,8,9,0,5,6,4,3,2,1};
         ListNode head = new ListNode(nums);
 
         System.out.println(head);
@@ -86,10 +129,17 @@ public class RemoveLinkedListElement {
 
         System.out.println(res);
 
-        res = removeLinkedListElement.removeElements2(head,2);
+        res = removeLinkedListElement.removeElements2(res,2);
 
         System.out.println(res);
 
+        res = removeLinkedListElement.removeElements3(res,5);
+
+        System.out.println(res);
+
+        res = removeLinkedListElement.removeElements4(res,7);
+
+        System.out.println(res);
     }
 
 }
