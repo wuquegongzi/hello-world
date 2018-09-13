@@ -270,6 +270,11 @@ public class BST<E extends Comparable<E>>{
         removeMin(root);
         return ret;
     }
+
+    private void removeMin(Node root) {
+        //TODO
+    }
+
     /**
      *
      * @return
