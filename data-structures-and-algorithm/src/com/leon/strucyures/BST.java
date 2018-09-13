@@ -1,5 +1,8 @@
 package com.leon.strucyures;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 二分搜索树
  * @param <E>
@@ -122,7 +125,7 @@ public class BST<E extends Comparable<E>>{
 
 
     /**
-     * 前序遍历
+     * 前序遍历 递归算法
      * @param e
      */
     public void preOrder(){
@@ -141,7 +144,25 @@ public class BST<E extends Comparable<E>>{
     }
 
     /**
-     * 中序遍历
+     * 前序遍历 非递归算法
+     */
+    public void preOrderNR(){
+        Stack<Node> stack = new ArrayStack<Node>();
+        stack.push(root);
+        while(!stack.isEmpty()){
+            Node cur = stack.pop();
+            System.out.println(cur.e);
+            if(cur.right != null){
+                stack.push(cur.right);
+            }
+            if(cur.left != null){
+                stack.push(cur.left);
+            }
+        }
+    }
+
+    /**
+     * 中序遍历 递归算法
      */
     public void inOrder(){
         inOrder(root);
@@ -158,7 +179,7 @@ public class BST<E extends Comparable<E>>{
     }
 
     /**
-     * 后续遍历
+     * 后序遍历 递归算法
      */
     public void postOrder(){
         postOrder(root);
@@ -173,6 +194,82 @@ public class BST<E extends Comparable<E>>{
         System.out.println(node.e);
     }
 
+    /**
+     * 二分搜索树的层序遍历
+     */
+    public void levelOrder(){
+
+        Queue<Node> q = new LinkedList<Node>();
+        q.add(root);
+        while (!q.isEmpty()){
+            Node cur = q.remove();
+            System.out.println(cur.e);
+
+            if(cur.left != null){
+                q.add(cur.left);
+            }
+            if(cur.right != null){
+                q.add(cur.right);
+            }
+        }
+    }
+
+    /**
+     * 寻找最小元素
+     * @return
+     */
+    public E minimum(){
+        if(size == 0){
+            try {
+                throw new IllegalAccessException("BST is empty!");
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return minimum(root).e;
+    }
+
+    private Node minimum(Node node) {
+        if(node.left == null){
+            return node;
+        }
+        return minimum(node.left);
+    }
+
+    /**
+     * 寻找最大元素
+     * @return
+     */
+    public E maximum(){
+        if(size == 0){
+            try {
+                throw new IllegalAccessException("BST is empty!");
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return maximum(root).e;
+    }
+
+    private Node maximum(Node node) {
+        if(node.right == null){
+            return node;
+        }
+        return maximum(node.right);
+    }
+
+    /**
+     * 删除最小元素
+     * @return
+     */
+    public E removeMin(){
+
+        E ret = minimum();
+        removeMin(root);
+        return ret;
+    }
     /**
      *
      * @return
@@ -190,7 +287,6 @@ public class BST<E extends Comparable<E>>{
             res.append(generateBSTString(depth)+"null \n");
             return;
         }
-
         res.append(generateBSTString(depth) + node.e +"\n");
         generateBSTString(node.left,depth + 1,res);
         generateBSTString(node.right,depth + 1,res);
@@ -213,13 +309,22 @@ public class BST<E extends Comparable<E>>{
         for (int i = 0; i < nums.length; i++) {
             bst.add(nums[i]);
         }
-
+        System.out.println("前序递归遍历：");
         bst.preOrder();
-        System.out.println();
+        System.out.println("前序非递归遍历：");
+        bst.preOrderNR();
+        System.out.println("中序递归遍历：");
         bst.inOrder();
-        System.out.println();
-        bst.inOrder();
-        System.out.println();
+        System.out.println("后序递归遍历：");
+        bst.postOrder();
+        System.out.println("层序遍历:");
+        bst.levelOrder();
+        System.out.println("toString:");
         System.out.println(bst);
+        System.out.println("最小值:");
+        System.out.println(bst.minimum());
+        System.out.println("最大值:");
+        System.out.println(bst.maximum());
+
     }
 }
