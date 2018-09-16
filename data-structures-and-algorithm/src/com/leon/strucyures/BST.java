@@ -126,7 +126,7 @@ public class BST<E extends Comparable<E>>{
 
     /**
      * 前序遍历 递归算法
-     * @param e
+     * @param
      */
     public void preOrder(){
         preOrder(root);
@@ -267,12 +267,47 @@ public class BST<E extends Comparable<E>>{
     public E removeMin(){
 
         E ret = minimum();
-        removeMin(root);
+        root = removeMin(root);
         return ret;
     }
 
-    private void removeMin(Node root) {
-        //TODO
+    private Node removeMin(Node node) {
+
+       if(node.left == null){
+           Node rightNode = node.right;
+           node.right = null;
+           size --;
+           return rightNode;
+       }
+
+       node.left = removeMin(node.left);
+       return node;
+
+    }
+
+    /**
+     * 删除最大元素
+     * @return
+     */
+    public E removeMax(){
+
+        E ret = minimum();
+        root = removeMax(root);
+        return ret;
+    }
+
+    private Node removeMax(Node node) {
+
+        if(node.right == null){
+            Node leftNode = node.left;
+            node.left = null;
+            size --;
+            return leftNode;
+        }
+
+        node.right = removeMax(node.right);
+        return node;
+
     }
 
     /**
@@ -314,6 +349,10 @@ public class BST<E extends Comparable<E>>{
         for (int i = 0; i < nums.length; i++) {
             bst.add(nums[i]);
         }
+
+//        bst.removeMin();
+//        bst.removeMax();
+
         System.out.println("前序递归遍历：");
         bst.preOrder();
         System.out.println("前序非递归遍历：");
