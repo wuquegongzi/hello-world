@@ -3,7 +3,7 @@ package com.leon.strucyures;
 /**
  * 数组栈
  * @package: com.leon.strucyures
- * @author: 陈明磊<minglei.chen @ gm-medicare.com>
+ * @author: 陈明磊<swchenminglei@163.com>
  * @date: 2018/8/7 20:17
  * @ModificarionHistory who     when   what
  * --------------|------------------|--------------
