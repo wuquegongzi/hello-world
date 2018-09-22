@@ -193,7 +193,7 @@ public class LinkedList<E> {
     }
 
     /**
-     * 去除链表中某个元素
+     * 根据索引去除链表中某个元素
      * @param index
      * @return
      */
@@ -218,6 +218,32 @@ public class LinkedList<E> {
 
         return retNode.e;
     }
+
+    /**
+     * 去除链表中某个元素
+     * @param e
+     * @return
+     */
+    public int removeElement(E e){
+
+        Node prev = dummyHead;
+
+        int number = 0;
+        int sizeTemp = size;
+        for (int i = 0; i < size; i++) {
+            Node retNode = prev.next;
+            if(retNode.e == e){
+                prev.next = retNode.next;
+                retNode.next = null;
+                sizeTemp --;
+                number ++;
+            }
+        }
+        size = sizeTemp;
+
+       return number;
+    }
+
 
     /**
      * 清除首元素
@@ -251,7 +277,7 @@ public class LinkedList<E> {
     public static void main(String[] args) {
         LinkedList<Integer> list = new LinkedList<>();
         for (int i = 0; i < 10 ; i++) {
-            list.add(i,i);
+            list.add(i,1);
             System.out.println(list.toString());
         }
         list.addFirst(99);
@@ -265,6 +291,10 @@ public class LinkedList<E> {
 
         list.removeLast();
         System.out.println(list.toString());
+
+        int num = list.removeElement(1);
+        System.out.println(num);
+        System.out.println("- -"+list.toString());
     }
 
 

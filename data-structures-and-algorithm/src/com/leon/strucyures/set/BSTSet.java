@@ -10,7 +10,7 @@ public class BSTSet<E extends Comparable<E>> implements Set<E> {
 
     private BST<E> bst;
 
-    public void BSTSet(){
+    public BSTSet(){
         bst = new BST<E>();
     }
 
