@@ -11,12 +11,13 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
-//        System.out.println("欢迎来到leon的数据结构世界~ \n ");
+
+        System.out.println("欢迎来到leon的数据结构世界~ \n ");
+        
     }
 
 
-    public static LinkedBlockingQueue<Map> queue;
+  /*  public static LinkedBlockingQueue<Map> queue;
 
     static {
         if(null == queue || queue.isEmpty()){
@@ -27,11 +28,11 @@ public class Main {
         Consumer t2 = new Consumer();
         t1.start();
         t2.start();
-    }
+    }*/
 
 }
 
-//队列消费
+/*//队列消费
 class Consumer extends Thread{
     @Override
     public void run() {
@@ -65,4 +66,4 @@ class Producer extends Thread{
             i++;
         }
     }
-}
+}*/
