@@ -1,7 +1,7 @@
 package com.leon.leetcode.L20;
 
 
-import com.leon.strucyures.ArrayStack;
+import com.leon.strucyures.stack.ArrayStack;
 
 /**
  * Solution20 https://leetcode-cn.com/problems/valid-parentheses/description/

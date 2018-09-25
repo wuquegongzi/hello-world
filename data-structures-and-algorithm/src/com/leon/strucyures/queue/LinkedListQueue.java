@@ -1,4 +1,4 @@
-package com.leon.strucyures;
+package com.leon.strucyures.queue;
 
 /**
  * 链表实现的队列

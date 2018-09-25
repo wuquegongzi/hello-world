@@ -1,4 +1,4 @@
-package com.leon.strucyures;
+package com.leon.strucyures.queue;
 
 /**
  * 循环队列
@@ -8,7 +8,7 @@ package com.leon.strucyures;
  * @ModificarionHistory who     when   what
  * --------------|------------------|--------------
  */
-public class LoopQueue<E> implements Queue<E>{
+public class LoopQueue<E> implements Queue<E> {
 
     private E[] data;
     private int front,tail;

@@ -1,42 +1,44 @@
-package com.leon.strucyures;
+package com.leon.strucyures.stack;
 
 /**
- * 队列接口
+ * 栈接口
  * @package: com.leon.strucyures
  * @author: 陈明磊<swchenminglei@163.com>
- * @date: 2018/8/8 16:33
+ * @date: 2018/8/7 20:12
  * @ModificarionHistory who     when   what
  * --------------|------------------|--------------
  */
-public interface Queue<E> {
+public interface Stack<E> {
+
 
     /**
-     * 入队
+     * 添加
      * @param e
      */
-    void enqueue(E e);
+    void push(E e);
 
     /**
-     * 出队
+     * 取出
      * @return
      */
-    E dequeue();
+    E pop();
 
     /**
-     * 获取队首
+     * 栈顶元素
      * @return
      */
-    E getFront();
+    E peek();
 
     /**
-     * 获取队列大小
+     * 获取大小
      * @return
      */
     int getSize();
 
     /**
-     * 判断队列是否为空
+     * 判断非空
      * @return
      */
     boolean isEmpty();
+
 }

@@ -1,4 +1,6 @@
-package com.leon.strucyures;
+package com.leon.strucyures.stack;
+
+import com.leon.strucyures.LinkedList;
 
 /**
  * @package: com.leon.strucyures

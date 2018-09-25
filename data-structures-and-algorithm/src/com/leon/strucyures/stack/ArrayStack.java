@@ -1,50 +1,53 @@
-package com.leon.strucyures;
+package com.leon.strucyures.stack;
+
+import com.leon.strucyures.Array;
 
 /**
- * 数组队列
+ * 数组栈
  * @package: com.leon.strucyures
  * @author: 陈明磊<swchenminglei@163.com>
- * @date: 2018/8/8 16:37
+ * @date: 2018/8/7 20:17
  * @ModificarionHistory who     when   what
  * --------------|------------------|--------------
  */
-public class ArrayQueue<E> implements Queue<E> {
+public class ArrayStack<E> implements Stack<E> {
 
-    private Array<E> array;
+    Array<E> array;
 
-    public ArrayQueue(int capacity){
+    public  ArrayStack(int capacity){
         array = new Array<>(capacity);
     }
 
-    public ArrayQueue(){
-        array = new Array();
+    public ArrayStack(){
+        array = new Array<>();
     }
 
+
     /**
-     * 入队
+     * 添加元素 e
      * @param e
      */
     @Override
-    public void enqueue(E e) {
-        array.addLast(e);
+    public void push(E e) {
+       array.addLast(e);
     }
 
     /**
-     * 出队
+     * 取出栈顶元素
      * @return
      */
     @Override
-    public E dequeue() {
-        return array.removeFirst();
+    public E pop() {
+        return array.removeLast();
     }
 
     /**
-     * 获取队首
+     * 查看栈顶元素
      * @return
      */
     @Override
-    public E getFront() {
-        return array.getFirst();
+    public E peek() {
+        return array.getLast();
     }
 
     @Override
@@ -57,15 +60,11 @@ public class ArrayQueue<E> implements Queue<E> {
         return array.isEmpty();
     }
 
-    public int getCapacity(){
-        return array.getCapacity();
-    }
-
     @Override
     public String toString(){
         StringBuilder res = new StringBuilder();
-        res.append("Queue :");
-        res.append("front [");
+        res.append("Stack :");
+        res.append("[");
         for (int i = 0 ; i < array.getSize() ; i++){
             res.append(array.get(i));
 
@@ -73,23 +72,21 @@ public class ArrayQueue<E> implements Queue<E> {
                 res.append(",");
             }
         }
-        res.append("] tail");
+        res.append("] top");
         return res.toString();
     }
 
-
     public static void main(String[] args) {
-        ArrayQueue<Integer> queue = new ArrayQueue<>();
+        System.out.println("Stack 数组自我实现的栈 \n");
 
-        for (int i=0 ; i < 10 ; i++){
-            queue.enqueue(i);
-            System.out.println(queue);
-            if( i % 3 == 2){
-                queue.dequeue();
-                System.out.println(queue);
-            }
+        ArrayStack<Integer> stack= new ArrayStack<Integer>();
+        for (int i = 0; i < 10 ; i++){
+            stack.push(i);
+            System.out.println(stack);
         }
 
+        stack.pop();
+        System.out.println(stack);
+        System.out.println(stack.peek());
     }
-
 }
