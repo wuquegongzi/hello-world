@@ -1,4 +1,4 @@
-package com.leon.leetcode.L203;
+package com.leon.leetcode;
 
 /**
  * Definition for singly-linked list.

@@ -1,11 +1,11 @@
-package com.leon.leetcode.L804;
+package com.leon.leetcode;
 
 import java.util.TreeSet;
 
 /**
  * 804. 唯一摩尔斯密码词
  */
-public class UniqueMorseRepresentations {
+public class L804_UniqueMorseRepresentations {
 
 
     public int uniqueMorseRepresentations(String[] words) {
@@ -34,7 +34,7 @@ public class UniqueMorseRepresentations {
     public static void main(String[] args) {
         String[] words = {"gin", "zen", "gig", "msg"};
 
-        UniqueMorseRepresentations uniqueMorseRepresentations = new UniqueMorseRepresentations();
+        L804_UniqueMorseRepresentations uniqueMorseRepresentations = new L804_UniqueMorseRepresentations();
 
         System.out.println(uniqueMorseRepresentations.uniqueMorseRepresentations(words));
     }

@@ -1,4 +1,4 @@
-package com.leon.leetcode.L203;
+package com.leon.leetcode;
 
 /**
  * https://leetcode-cn.com/problems/remove-linked-list-elements/description/
@@ -16,7 +16,7 @@ package com.leon.leetcode.L203;
  * @ModificarionHistory who     when   what
  * --------------|------------------|--------------
  */
-public class RemoveLinkedListElement {
+public class L203_RemoveLinkedListElement {
 
 
 
@@ -124,7 +124,7 @@ public class RemoveLinkedListElement {
 
         System.out.println(head);
 
-        RemoveLinkedListElement removeLinkedListElement = new RemoveLinkedListElement();
+        L203_RemoveLinkedListElement removeLinkedListElement = new L203_RemoveLinkedListElement();
         ListNode res = removeLinkedListElement.removeElements(head,6);
 
         System.out.println(res);

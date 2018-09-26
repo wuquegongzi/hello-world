@@ -1,4 +1,4 @@
-package com.leon.leetcode.L20;
+package com.leon.leetcode;
 
 import java.util.Stack;
 
@@ -19,7 +19,7 @@ import java.util.Stack;
  * @ModificarionHistory who     when   what
  * --------------|------------------|--------------
  */
-public class ValidParentheses {
+public class L20_ValidParentheses {
 
    public boolean isValid(String s){
 
@@ -53,7 +53,7 @@ public class ValidParentheses {
 
         String s = "[{()}]";
 
-        ValidParentheses validParentheses = new ValidParentheses();
+        L20_ValidParentheses validParentheses = new L20_ValidParentheses();
 
         System.out.println(validParentheses.isValid(s));
     }
