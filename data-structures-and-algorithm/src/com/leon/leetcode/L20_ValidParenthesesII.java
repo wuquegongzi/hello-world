@@ -20,7 +20,7 @@ import com.leon.strucyures.stack.ArrayStack;
  * @ModificarionHistory who     when   what
  * --------------|------------------|--------------
  */
-public class L20_ValidParentheses02 {
+public class L20_ValidParenthesesII {
 
    public boolean isValid(String s){
 
@@ -54,7 +54,7 @@ public class L20_ValidParentheses02 {
 
         String s = "[{(]}]";
 
-        L20_ValidParentheses02 validParentheses = new L20_ValidParentheses02();
+        L20_ValidParenthesesII validParentheses = new L20_ValidParenthesesII();
 
         System.out.println(validParentheses.isValid(s));
     }
