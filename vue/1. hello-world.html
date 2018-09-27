@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Hello world</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{ content }}
+    </div>
+
+    <script>
+            var app = new Vue({
+                el:'#app',
+                data:{
+                    content:'hello world'
+                }
+            });
+
+            setTimeout(function(){
+                 app.content = 'bye vue'
+            },2000);
+    </script>
+</body>
+</html>
