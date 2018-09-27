@@ -10,18 +10,37 @@
         <input type="text" v-model="inputValue"/>
         <button v-on:click="handleBtnClick">提交</button>
         <ul>
-            <li v-for="item in list">{{item}}</li>
+            <!-- <li v-for="item in list">{{item}}</li>  -->
+            <!--组件引用-->
+            <todo-item v-bind:content="item" v-for="item in list">{{item}}></todo-item>
         </ul>
     </div>
 
     <script>
+
+        //定义全局组件
+        // Vue.component("TodoItem",{
+        //     props:['content'],
+        //     template:"<li>{{content}}</li>"
+        // })
+
+        //定义局部组件
+        var TodoItem = {
+            props:['content'],
+            template:"<li>{{content}}</li>"
+        }
+
         var app = new Vue({
             el:'#app',
+            components:{  //注册局部组件
+                TodoItem: TodoItem
+            },
             data:{
                 list:[],
                 inputValue:''
             },
             methods:{
+                //绑定方法
                 handleBtnClick: function(){
                     this.list.push(this.inputValue);
                     this.inputValue = '';
