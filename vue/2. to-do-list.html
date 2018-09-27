@@ -12,7 +12,11 @@
         <ul>
             <!-- <li v-for="item in list">{{item}}</li>  -->
             <!--组件引用-->
-            <todo-item v-bind:content="item" v-for="item in list">{{item}}></todo-item>
+            <todo-item v-bind:content="item" 
+                       v-bind:index="index" 
+                       v-for="(item,index) in list"
+                       @delete = "handleItemDelete">
+            </todo-item>
         </ul>
     </div>
 
@@ -26,8 +30,13 @@
 
         //定义局部组件
         var TodoItem = {
-            props:['content'],
-            template:"<li>{{content}}</li>"
+            props:['content' , 'index'], //接收父组件传的值
+            template:"<li @click ='handleItemClick'>{{content}}</li>",
+            methods:{
+                handleItemClick: function(){
+                    this.$emit("delete",this.index);  //触发delete事件，并向父组件传值
+                }
+            }
         }
 
         var app = new Vue({
@@ -44,6 +53,9 @@
                 handleBtnClick: function(){
                     this.list.push(this.inputValue);
                     this.inputValue = '';
+                },
+                handleItemDelete: function(index){
+                    this.list.splice(index,1);
                 }
             }
         })
