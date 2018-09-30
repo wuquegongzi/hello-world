@@ -254,6 +254,25 @@ public class Array<E> {
 
     }*/
 
+    /**
+     * 交换
+     * @param i
+     * @param j
+     */
+    public void swap(int i, int j){
+        if(i < 0 || i >= size || j <0 || j >= size){
+            try {
+                throw new IllegalAccessException("Index is illegal.");
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
+        E t = data[i];
+        data[i] = data[j];
+        data[j] = t;
+    }
+
     @Override
     public String toString(){
        StringBuilder res = new StringBuilder();
