@@ -23,6 +23,22 @@ public class MaxHeap<E extends Comparable<E>> {
        data = new Array<>();
     }
 
+
+    /**
+     * heapify  随意一个数组转换成堆
+     * O(log n)
+     * @param arry
+     */
+    public MaxHeap(E[] arry){
+        data = new Array<>(arry);
+
+        //heapify
+        //parent(arry.length - 1) 最后一个叶子节点的父亲节点
+        for (int i = parent(arry.length - 1) ; i >=0 ; i --){
+            siftDown(i);
+        }
+    }
+
     public int size(){
         return data.getSize();
     }
@@ -70,6 +86,7 @@ public class MaxHeap<E extends Comparable<E>> {
 
     /**
      * 向堆中添加元素
+     * O(n)
      * @param e
      */
     public void add(E e){
@@ -148,29 +165,79 @@ public class MaxHeap<E extends Comparable<E>> {
         }
     }
 
+    /**
+     * 取出堆中的最大元素，并且替换成新元素e
+     * @param e
+     * @return
+     */
+    public E replace(E e){
 
-    public static void main(String[] args) throws IllegalAccessException {
-        int n = 1000000;
-        MaxHeap<Integer> maxHeap = new MaxHeap<>();
-        Random random = new Random();
-        for (int i = 0; i < n; i++) {
-            maxHeap.add(random.nextInt(Integer.MAX_VALUE));
-//            System.out.println(maxHeap.size());
+        E ret = findMax();
+        data.set(0,e);
+        siftDown(0);
+        return ret;
+    }
+
+
+    /**
+     * 测试 方法复杂度
+     * @param testData
+     * @param isHeapify
+     * @return
+     */
+    private static double testHeap(Integer[] testData,boolean isHeapify) throws IllegalAccessException {
+
+        long startTime = System.nanoTime();
+
+        MaxHeap<Integer> maxHeap;
+
+        if(isHeapify){
+            maxHeap = new MaxHeap<>(testData);
+
+        }else{
+            maxHeap = new MaxHeap<>();
+            for (int num : testData){
+                maxHeap.add(num);
+            }
         }
 
-        int[] arr = new int[n];
-        for (int i = 0 ; i < n; i ++){
+        int[] arr = new int[testData.length];
+        for (int i = 0 ; i < testData.length; i ++){
             arr[i] = maxHeap.extractMax();
 //            System.out.println(arr[i]);
         }
 
-        for(int i = 1 ;i < n; i++){
+        for(int i = 1 ;i < testData.length; i++){
             if(arr[i-1] < arr[i]){
                 throw  new IllegalAccessException("Error");
             }
         }
 
         System.out.println("Test MaxHeap completed.");
+
+
+        long endTime = System.nanoTime();
+
+        return (endTime-startTime) / 1000000000.0;
+    }
+
+
+    public static void main(String[] args) throws IllegalAccessException {
+        int n = 1000000;
+        MaxHeap<Integer> maxHeap = new MaxHeap<>();
+
+        Integer[] testData = new Integer[n];
+
+        Random random = new Random();
+        for (int i = 0; i < n; i++) {
+            testData[i] =  random.nextInt(Integer.MAX_VALUE);
+        }
+
+        double time1 = testHeap(testData,false);
+        System.out.println("Without heapify "+ time1 + "s");
+
+        double time2 = testHeap(testData,true);
+        System.out.println("With heapify "+ time2 + "s");
     }
 
 }
