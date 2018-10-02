@@ -130,35 +130,38 @@ public class MaxHeap<E extends Comparable<E>> {
         while(leftChild(k) < data.getSize()){
 
             int j = leftChild(k);
+
+            //  判断右孩子
             if(j + 1 <data.getSize() &&
                     data.get(j + 1).compareTo(data.get(j)) > 0){
                j = rightChild(k);
-
-               //此时data[j] 是 leftChild 和 rightChild 中最大值
-               if(data.get(k).compareTo(data.get(j)) >= 0){
-                    break;
-               }
-
-               data.swap(k, j);
-               k = j;
             }
+
+            //此时data[j] 是 leftChild 和 rightChild 中最大值
+            if(data.get(k).compareTo(data.get(j)) >= 0){
+                break;
+            }
+
+            data.swap(k, j);
+            k = j;
+
         }
     }
 
 
     public static void main(String[] args) throws IllegalAccessException {
-        int n = 100;
+        int n = 1000000;
         MaxHeap<Integer> maxHeap = new MaxHeap<>();
         Random random = new Random();
         for (int i = 0; i < n; i++) {
             maxHeap.add(random.nextInt(Integer.MAX_VALUE));
-            System.out.println(maxHeap.size());
+//            System.out.println(maxHeap.size());
         }
 
         int[] arr = new int[n];
         for (int i = 0 ; i < n; i ++){
             arr[i] = maxHeap.extractMax();
-            System.out.println(arr[i]);
+//            System.out.println(arr[i]);
         }
 
         for(int i = 1 ;i < n; i++){
