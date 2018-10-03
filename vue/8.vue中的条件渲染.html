@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>vue中的条件渲染</title>
+    <script src="vue.js"></script>
+    <style>
+       .activated{
+           color: red
+       }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+       <div v-if="show">{{message}}</div>
+       <div v-else>bye bye</div>
+       <!-- display:none-->
+       <div v-show="show">{{message}}</div>
+
+       <div v-if="flag === 'a'">this is a</div>
+       <div v-else-if="flag === 'b'">this is b</div>
+       <div v-else>this is others</div>
+
+
+       <div v-if="show"> <!--自定义key ，为了防止vue自动使用input的dom缓存-->
+             用户名：<input  key="username"/> 
+       </div>
+       <div v-else>
+             邮箱名：<input  key="email"/> 
+       </div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data: {
+                show:false,
+                flag:"a",
+                message: "hello world"
+            }
+        })
+    </script>
+</body>
+</html>
