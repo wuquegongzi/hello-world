@@ -10,9 +10,14 @@
        <div v-for="(item , index) of list" :key="item.id">
            {{item.text}} ---- {{index}}
         </div>
+
+        <div v-for="(item , key , index) of userinfo" :key="item.id">
+                {{item}} ----{{key}} ---- {{index}}
+        </div>
     </div>
 
     <script>
+        //push pop shift  unshift splice sort  reverse(取反)
         var vm = new Vue({
             el:'#app',
             data:  {
@@ -23,10 +28,50 @@
                 {
                     id: "02",
                     text: "leon"
+                }],
+                userinfo:{
+                    id:"1989",
+                    name:"chen",
+                    age:28,
+                    address:"beijing"
                 }
-                ]
             }
         })
+
+       //去除并添加
+        vm.list.splice(1,1,{id:"333",text:"chen"});
+
+       //改变引用也可以
+        vm.list = [{
+                    id: "01",
+                    text: "1111111"
+                },
+                {
+                    id: "02",
+                    text: "222222"
+                },
+                {
+                    id: "03",
+                    text: "333333"
+                },
+                {
+                    id: "04",
+                    text: "44444"
+                },
+                {
+                    id: "05",
+                    text: "55555"
+                }];
+
+        vm.list.push({id:"06",text:"66666666"}); //向数组的 尾部 添加若干元素，并返回 数组的 新长度；
+        vm.list.unshift({id:"07",text:"7777777"});    //向数组的 头部 添加若干元素，并返回 数组的 新长度；
+        // vm.list.pop(); //永远返回最后一个；
+        // vm.list.shift(); //永远返回第一个；
+       
+
+       //修改属性值
+       Vue.set(vm.userinfo,"address","shanghai");
+
     </script>
 </body>
 </html>

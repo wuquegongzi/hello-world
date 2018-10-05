@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>组件使用中的细节点</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+         <table>
+            <tbody>
+                <!-- 使用 is 避免 渲染组件时跳出父级标签-->
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+            </tbody>
+         </table>
+
+         <!--操作dom的特殊情况 使用ref-->
+         <div ref="hello" @click="handlerClick">hello world</div>
+    </div>
+
+    <script>
+        Vue.component("row",{
+            data : function(){
+               return {
+                   content:"this is a row"
+               } 
+            },
+            template:"<tr><td>{{content}}</td></tr>"
+        });
+        
+        var vm = new Vue({
+            el:'#app',
+            methods:  {
+                handlerClick: function(){
+                   alert(this.$refs.hello.innerHTML);
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>
