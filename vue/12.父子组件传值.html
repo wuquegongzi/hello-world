@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>父子组件传值</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!--加冒号 0为数字  不加的话是字符串-->
+       <counter :count="0" @change="handleChange"></counter>
+       <counter :count="0" @change="handleChange"></counter>
+       <div>{{toatl}}</div>
+    </div>
+
+    <script>
+        var counter = {
+            props: ['count'],
+            data:function(){
+                return {
+                    number: this.count
+                }
+            },
+            template: '<div @click="handleClick">{{number}}</div>',
+            methods: {
+                handleClick: function(){
+
+                    // 不要使用this.count++,因为子组件不允许直接修改父组件传过来的值  单向数据流
+                    this.number = this.number + 2;  // 使用自定义的副本
+                    this.$emit('change',2); // change可自定义
+                }
+            }
+        }
+        
+        var vm = new Vue({
+            el:'#root',
+            //注册局部组件
+            components:{
+                counter: counter
+            },
+            data: {
+               toatl: 0
+            },
+            methods: {
+                handleChange: function(step){
+                    this.toatl += step
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>
