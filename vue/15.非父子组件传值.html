@@ -7,21 +7,40 @@
 </head>
 <body>
     <div id="root">
-      <child></child>
-      <child></child>
+      <child content="Dell"></child>
+      <child content="Hp"></child>
     </div>
 
     <script>
+        //绑定bus
+        Vue.prototype.bus = new Vue()
+
         Vue.component('child',{
-            template:'<div>Child</div>'
-        })
-        var vm = new Vue({
-            el:'#root',
+            data:function() {
+                return {
+                    selfContent : this.content
+                }
+            },
+            props:{
+                content:String
+            },
+            template:'<div @click="handleClick">{{selfContent}}</div>',
             methods: {
                 handleClick: function(){
-                    alert('click')
+                    //
+                   this.bus.$emit('change',this.selfContent)
                 }
+            },
+            mounted: function(){
+                var this_ = this;
+                this.bus.$on('change',function(msg){
+                    this_.selfContent = msg;
+                })
             }
+        })
+        var vm = new Vue({
+            el:'#root'
+            
         })
 
     </script>
