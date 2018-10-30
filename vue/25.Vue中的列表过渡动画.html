@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Vue中的列表过渡动画</title>
+    <script src="vue.js"></script>
+    <style>
+       .v-enter,
+       .v-leave-to {
+          opacity: 0;
+       }
+
+       .v-enter-active,
+       .v-leave-active {
+            transition:  opacity 3s;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <button @click="handleBtnClick">Add</button>
+
+        <!--使用组件 transition-group-->
+        <transition-group>
+            <div v-for="(item) of list" :key="item.id">
+                {{item.title}} {{item.id}}
+            </div>
+        </transition-group>
+    </div>
+
+    <script>
+    
+        var count =0;
+
+        var vm = new Vue({
+            el:'#root',
+            data: {
+                list:[]
+                
+            },
+            methods: {
+                handleBtnClick: function(){
+                   this.list.push({
+                       id: count++,
+                       title:"love"
+                   })
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>
