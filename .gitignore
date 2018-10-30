@@ -29,3 +29,12 @@ data-structures-and-algorithm/.idea/inspectionProfiles/Project_Default.xml
 data-structures-and-algorithm/.idea/compiler.xml
 data-structures-and-algorithm/.idea/uiDesigner.xml
 data-structures-and-algorithm/data-structures-and-algorithm.iml
+rabbitmq-api/bin/.mvn/wrapper/maven-wrapper.jar
+rabbitmq-api/bin/.mvn/wrapper/maven-wrapper.properties
+rabbitmq-api/bin/mvnw
+rabbitmq-api/bin/mvnw.cmd
+rabbitmq-api/bin/pom.xml
+rabbitmq-api/bin/README.md
+rabbitmq-api/bin/src/main/resources/application.properties
+vue/.vscode/launch.json
+vue/.vscode/tasks.json

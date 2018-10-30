@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Vue中的动画原理</title>
+    <script src="vue.js"></script>
+    <style>
+       .suibian-enter,
+       .suibian-leave-to {
+          opacity: 0;
+       }
+
+       .suibian-enter-active,
+       .suibian-leave-active {
+            transition:  opacity 3s;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="root">
+
+        <transition name="suibian">
+           <div v-if="show">hello leon</div>
+        </transition>
+
+       <button @click="handleBtnClick">切换</button>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#root',
+            data: {
+                show: true 
+            },
+            methods: {
+                handleBtnClick: function(){
+                  this.show = !this.show
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>

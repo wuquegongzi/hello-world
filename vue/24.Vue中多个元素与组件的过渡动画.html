@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Vue中多个元素与组件的过渡动画</title>
+    <script src="vue.js"></script>
+    <style>
+       .v-enter,
+       .v-leave-to {
+          opacity: 0;
+       }
+
+       .v-enter-active,
+       .v-leave-active {
+            transition:  opacity 3s;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+
+        <!--mode="out-in" 先隐藏再展示-->
+         <!--使用key关键字 区分不同元素-->
+       <transition mode="out-in">
+            <h1 v-if="show" key="hello">Hello World</h1>
+            <h1 v-else="show" key="bye">Bye World</h1>
+       </transition>
+
+       <button @click="handleBtnClick">元素切换</button>
+
+       <transition mode="out-in">
+        <component :is="type"></component>
+       </transition>
+
+       <button @click="handleBtnClick2">组件切换</button>
+    </div>
+
+    <script>
+        Vue.component('child-one', {
+            template: '<h1> one </h1>'
+        })
+        Vue.component('child-two', {
+            template: '<h1> two </h1>'
+        })
+
+        var vm = new Vue({
+            el:'#root',
+            data: {
+                show: true,
+                type: 'child-one'
+            },
+            methods: {
+                handleBtnClick: function(){
+                  this.show = !this.show;
+                },
+                handleBtnClick2: function(){
+                  this.type = this.type === 'child-one' ? this.type= 'child-two' : this.type='child-one';
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Vue中同时使用过渡和动画</title>
+    <script src="vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="animate.css"/>
+</head>
+<body>
+    <div id="root">
+       <!-- 使用 animate 动画效果-->
+       <transition name="fade"
+            appear
+            enter-active-class="animated swing"
+            leave-active-class="animated shake"
+            appear-active-class="animated jello"
+            >
+                <div v-if="show">hello leon</div>
+       </transition>
+
+       <button @click="handleBtnClick">animate-切换</button>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#root',
+            data: {
+                show: true
+            },
+            methods: {
+                handleBtnClick: function(){
+                  this.show = !this.show
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>
