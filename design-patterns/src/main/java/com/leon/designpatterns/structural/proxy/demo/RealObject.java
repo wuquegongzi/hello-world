@@ -1,4 +1,4 @@
-package com.leon.designpatterns.structural.proxy;
+package com.leon.designpatterns.structural.proxy.demo;
 
 /**
  * 目标对象角色

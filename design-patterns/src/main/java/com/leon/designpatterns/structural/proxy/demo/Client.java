@@ -1,4 +1,4 @@
-package com.leon.designpatterns.structural.proxy;
+package com.leon.designpatterns.structural.proxy.demo;
 
 /**
  * 代理模式
