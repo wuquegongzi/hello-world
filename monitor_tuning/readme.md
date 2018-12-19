@@ -14,13 +14,13 @@
    
 
   ## 3.XX参数
-  ###3.1 Boolean类型
+  ### 3.1 Boolean类型
    > 格式： -XX:[+-]< name > 表示启用或者禁用name属性  
      eg:  
      -XX:+UseConcMarkSweepGC   启用CMS垃圾收集器  
      -XX:+UseG1GC  启用G1垃圾收集器
    
-  ###3.2 非Boolean类型
+  ### 3.2 非Boolean类型
   > 格式：-XX:< name > = < value > 表示name属性的值是value  
     eg:  
     -XX:MaxGCPauseMillis=500  
