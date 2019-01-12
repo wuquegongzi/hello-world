@@ -1,4 +1,4 @@
-package com.leon.highconcurrent;
+package com.leon.concurrency;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
