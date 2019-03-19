@@ -1,0 +1,15 @@
+参数说明： 
+image：8位单通道图像。 
+contours：存储检测到的轮廓的集合。 
+hierarchy：可选的输出向量，包含了图像轮廓的拓扑信息。 
+mode：轮廓检索模式。有如下几种模式： 
+1、RETR_EXTERNAL只检测最外围的轮廓 
+2、RETR_LIST提取所有的轮廓,不建立上下等级关系,只有兄弟等级关系 
+3、RETR_CCOMP提取所有轮廓,建立为双层结构 
+4、RETR_TREE提取所有轮廓,建立网状结构 
+method：轮廓的近似方法。取值如下： 
+1、CHAIN_APPROX_NONE获取轮廓的每一个像素,像素的最大间距不超过1 
+2、CHAIN_APPROX_SIMPLE压缩水平垂直对角线的元素,只保留该方向的终点坐标(也就是说一条中垂线a-b,中间的点被忽略了) 
+3、CHAIN_APPROX_TC89_LI使用TEH_CHAIN逼近算法中的LI算法 
+4、CHAIN_APPROX_TC89_KCOS使用TEH_CHAIN逼近算法中的KCOS算法 
+offset：每个轮廓点的可选偏移量。

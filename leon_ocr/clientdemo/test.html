@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html  lang="zh">
+<meta charset="utf-8">
+<script src="jquery.min.js"></script>
+<body class="white-bg">
+   
+        <form class="form-horizontal m" id="form-activity-add" autocomplete="off">
+		
+				<label class="col-sm-3 control-label">图片：</label>
+				<input type="file" accept="image/*"  id="image" name="image" >
+				选取
+               
+			   <input type="button" value="提交" onclick="submitHandler()"/>
+		</form>
+	</div>
+    <script type="text/javascript">
+
+
+		function submitHandler() {
+           
+            var formdata = new FormData();
+            var image = $('#image').get(0).files[0];
+            if(image === undefined){
+               return;
+            }
+            formdata.append("image", image);
+              $.ajax({
+                url: "http://192.168.150.123:8083/img_censor_quality",
+                type: "post",
+                processData: false,
+                contentType: false,
+                data: formdata,
+                error : function(e) {
+                    alert("系统错误");
+                },
+                success: function (data2) {
+                    alert(data2.code+data2.msg);
+                }
+            });
+	    }
+
+	</script>
+</body>
+</html>
