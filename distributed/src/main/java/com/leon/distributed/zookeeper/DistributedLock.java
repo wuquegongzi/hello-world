@@ -1,5 +1,7 @@
 package com.leon.distributed.zookeeper;
 
+import org.apache.zookeeper.KeeperException;
+
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -8,18 +10,15 @@ import java.util.concurrent.TimeUnit;
 public interface DistributedLock {
 
     /**
-     * 上锁
+     * 同步加锁
      * @throws LockingException
      */
     boolean lock() throws LockingException;
 
     /**
-     *  获取锁，直到超时
-     * @param timeout  超时时间
-     * @param unit  参数的单位
-     * @return 是否获取到锁
+     *  尝试加锁
      */
-    boolean tryLock(long timeout, TimeUnit unit);
+    boolean tryLock() throws KeeperException, InterruptedException;
 
     /**
      * 释放锁
@@ -28,7 +27,7 @@ public interface DistributedLock {
     boolean unlock() throws LockingException;
 
 
-    public static class LockingException extends RuntimeException {
+   class LockingException extends RuntimeException {
         public LockingException(String msg, Exception e) {
             super(msg, e);
         }
