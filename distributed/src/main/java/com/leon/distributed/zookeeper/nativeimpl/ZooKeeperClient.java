@@ -55,7 +55,7 @@ public class ZooKeeperClient {
             }
         }
 
-        System.out.println("获取zookeeper连接实例："+zookeeper);
+//        System.out.println("获取zookeeper连接实例："+zookeeper);
         return zookeeper;
     }
 
