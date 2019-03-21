@@ -1,13 +1,12 @@
-package com.leon.distributed.zookeeper.nativeimpl;
+package com.leon.distributed.zookeeper.service.impl.nativeapi;
 
-import com.leon.distributed.zookeeper.DistributedLock;
-import com.leon.distributed.zookeeper.LockInfo;
+import com.leon.distributed.zookeeper.service.DistributedLock;
+import com.leon.distributed.zookeeper.model.LockInfo;
 import org.apache.zookeeper.*;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-import java.util.Random;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.CountDownLatch;
@@ -162,42 +161,6 @@ public class DistributedLockImpl implements DistributedLock {
             e.printStackTrace();
         }
         return false;
-    }
-
-    public static void main(String[] args){
-
-        Runnable runnable = new Runnable() {
-            public void run() {
-                boolean isLock = false;
-                DistributedLock lock = null;
-                try {
-                    LockInfo lockInfo = new LockInfo("/zk-lock-"+new Random().nextInt(10), "person"+ System.currentTimeMillis()+new Random().nextInt(100));
-                    lock = new DistributedLockImpl( lockInfo);
-
-                    isLock = lock.lock();
-                    System.out.println(lockInfo.getLockOwner() + "获取锁结果："+isLock);
-
-                    if(isLock){
-                        //TODO 获取到锁，处理相关业务
-                        System.out.println(" 获取到锁，处理相关业务"+lockInfo.getLockOwner());
-                    }
-                    Thread.sleep(1000);
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                }finally{
-                    if (lock != null &&  isLock) {
-                        lock.unlock();
-                    }
-                }
-            }
-        };
-
-        for (int i = 0; i < 100; i++) {
-            Thread t = new Thread(runnable);
-            t.start();
-        }
-
     }
 
 }

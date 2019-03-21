@@ -1,4 +1,4 @@
-package com.leon.distributed.zookeeper;
+package com.leon.distributed.zookeeper.model;
 
 public class LockInfo {
 

@@ -1,4 +1,4 @@
-package com.leon.distributed.zookeeper;
+package com.leon.distributed.zookeeper.service;
 
 import org.apache.zookeeper.KeeperException;
 
