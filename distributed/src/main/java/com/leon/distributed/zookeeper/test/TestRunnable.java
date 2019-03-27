@@ -1,4 +1,4 @@
-package com.leon.distributed.zookeeper;
+package com.leon.distributed.zookeeper.test;
 
 import com.leon.distributed.zookeeper.model.LockInfo;
 import com.leon.distributed.zookeeper.service.impl.nativeapi.DistributedLockImpl;
@@ -36,9 +36,10 @@ public class TestRunnable implements Runnable {
 
             if(isLock){
                 //TODO 获取到锁，处理相关业务
+
                 System.out.println(" 获取到锁，处理相关业务"+lockInfo.getLockOwner());
+                Thread.sleep(200);  //就按照每个业务处理平均200ms完成
             }
-            Thread.sleep(200);  //就按照每个业务处理平均200ms完成
 
         }catch (Exception e){
             e.printStackTrace();
