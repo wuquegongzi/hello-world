@@ -1,6 +1,4 @@
-package com.leon.core.java8.recon;
-
-import com.leon.core.java8.recon.model.Customer;
+package com.leon.core.java8.recon.template_method;
 
 import java.util.function.Consumer;
 
@@ -19,7 +17,6 @@ public class OnlineBankingLambda {
         Customer c = Database.getCustomerWithId(id);
         makeCustomerHappy.accept(c);
     }
-
 
     // dummy Database class
     static private class Database{

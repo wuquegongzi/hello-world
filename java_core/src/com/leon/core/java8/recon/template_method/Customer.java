@@ -1,4 +1,4 @@
-package com.leon.core.java8.recon.model;
+package com.leon.core.java8.recon.template_method;
 
 public class Customer {
 

@@ -1,6 +1,4 @@
-package com.leon.core.java8.recon;
-
-import com.leon.core.java8.recon.model.Customer;
+package com.leon.core.java8.recon.template_method;
 
 /**
  * 模板方法
@@ -12,7 +10,6 @@ abstract class OnlineBanking {
         makeCustomerHappy(c);
     }
     abstract void makeCustomerHappy(Customer c);
-
 
     // dummy Datbase class
     static private class Database{
