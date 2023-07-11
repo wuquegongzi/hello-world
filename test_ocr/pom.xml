@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.gmm</groupId>
-    <artifactId>leon-ocr</artifactId>
+    <artifactId>test-ocr</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>leon-ocr</name>
     <description>tess4J</description>
