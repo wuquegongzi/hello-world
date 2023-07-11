@@ -119,7 +119,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.2.19</version>
+            <version>42.3.8</version>
         </dependency>
         <!--MongoDB Spark 连接器选项-->
         <dependency>
